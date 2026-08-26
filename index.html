@@ -7,18 +7,19 @@
   
   <!-- PWA Manifest & Ikony -->
   <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#111111">
   <link rel="apple-touch-icon" href="274846A2-142B-423E-A230-6680FD6B364D.jpeg">
 
   <style>
     :root {
-      --bg-color: #f8fafc;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --primary: #2563eb;
-      --primary-hover: #1d4ed8;
-      --border: #e2e8f0;
+      --bg-color: #0b0b0b;
+      --card-bg: #161616;
+      --text-main: #f8fafc;
+      --text-muted: #a1a1aa;
+      --gold-primary: #d4af37;
+      --gold-hover: #f3e5ab;
+      --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+      --border: #27272a;
       --danger: #ef4444;
       --radius: 12px;
     }
@@ -46,17 +47,18 @@
     }
 
     .header-logo img {
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       border-radius: 8px;
       object-fit: cover;
+      border: 1px solid var(--gold-primary);
     }
 
     .card {
       background: var(--card-bg);
       border-radius: var(--radius);
       padding: 24px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
       border: 1px solid var(--border);
       margin-bottom: 16px;
     }
@@ -64,6 +66,7 @@
     h1 {
       font-size: 1.5rem;
       font-weight: 700;
+      color: var(--text-main);
     }
 
     p {
@@ -80,12 +83,15 @@
       display: block;
       font-size: 0.85rem;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      color: var(--gold-primary);
     }
 
     input {
       width: 100%;
-      padding: 10px 12px;
+      padding: 12px;
+      background-color: #222222;
+      color: #ffffff;
       border: 1px solid var(--border);
       border-radius: 8px;
       font-size: 1rem;
@@ -93,31 +99,36 @@
     }
 
     input:focus {
-      border-color: var(--primary);
+      border-color: var(--gold-primary);
     }
 
     button {
       width: 100%;
       padding: 12px;
-      background-color: var(--primary);
-      color: white;
+      background: var(--gold-gradient);
+      color: #000000;
       border: none;
       border-radius: 8px;
-      font-weight: 600;
+      font-weight: 700;
       font-size: 1rem;
       cursor: pointer;
       margin-top: 8px;
+      transition: opacity 0.2s ease;
     }
 
     button:hover {
-      background-color: var(--primary-hover);
+      opacity: 0.9;
     }
 
     .btn-secondary {
-      background-color: transparent;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--gold-primary);
+      border: 1px solid var(--gold-primary);
       margin-top: 8px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(212, 175, 55, 0.1);
     }
 
     .hidden {
