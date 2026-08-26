@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Znovu Silnější</title>
+  
+  <!-- PWA Manifest & Ikony -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --border: #e2e8f0;
+      --danger: #ef4444;
+      --radius: 12px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      padding: 20px 16px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .header-logo img {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .input-group {
+      margin-bottom: 12px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      margin-top: 8px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .workout-list {
+      list-style: none;
+      margin-top: 16px;
+    }
+
+    .workout-item {
+      padding: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .workout-item:last-child {
+      border-bottom: none;
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- AUTH CARD -->
+  <div id="authCard" class="card">
+    <div class="header-logo">
+      <img src="icon.png" alt="Logo">
+      <h1>Silnější</h1>
+    </div>
+    <p id="authSubtitle">Vstupte do své tréninkové aplikace</p>
+    
+    <div class="input-group">
+      <label for="email">E-mail</label>
+      <input type="email" id="email" placeholder="vas@email.cz">
+    </div>
+
+    <div class="input-group">
+      <label for="password">Heslo</label>
+      <input type="password" id="password" placeholder="••••••••">
+    </div>
+
+    <div id="authError" class="error-message hidden"></div>
+
+    <button id="btnLogin">Přihlásit se</button>
+    <button id="btnRegister" class="btn-secondary">Vytvořit nový účet</button>
+  </div>
+
+  <!-- APP CARD -->
+  <div id="appCard" class="card hidden">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <div class="header-logo" style="margin-bottom: 0;">
+        <img src="icon.png" alt="Logo" style="width: 32px; height: 32px;">
+        <h1 style="font-size: 1.25rem;">Znovu Silnější</h1>
+      </div>
+      <button id="btnLogout" class="btn-secondary" style="width: auto; padding: 6px 12px; margin: 0;">Odhlásit</button>
+    </div>
+
+    <div class="input-group">
+      <label for="exerciseName">Cvik</label>
+      <input type="text" id="exerciseName" placeholder="např. Benčpres">
+    </div>
+
+    <div style="display: flex; gap: 10px;">
+      <div class="input-group" style="flex: 1;">
+        <label for="weight">Váha (kg)</label>
+        <input type="number" id="weight" placeholder="80">
+      </div>
+      <div class="input-group" style="flex: 1;">
+        <label for="reps">Opakování</label>
+        <input type="number" id="reps" placeholder="10">
+      </div>
+    </div>
+
+    <button id="btnAddWorkout">Uložit trénink</button>
+
+    <ul id="workoutList" class="workout-list"></ul>
+  </div>
+
+  <!-- FIREBASE CONFIGURATION -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, query, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyBRwpuyQkbMBaX9E7hVx_WxQRd4mKf6dM4",
+      authDomain: "silny-4182a.firebaseapp.com",
+      projectId: "silny-4182a",
+      storageBucket: "silny-4182a.firebasestorage.app",
+      messagingSenderId: "987967454091",
+      appId: "1:987967454091:web:e8c444e34a259d1bcf8d8e",
+      measurementId: "G-B2JC1KTNCH"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    window.auth = getAuth(app);
+    window.db = getFirestore(app);
+    window.fbMethods = { createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, collection, addDoc, query, where, onSnapshot };
+  </script>
+
+  <script src="app.js"></script>
+
+  <!-- REGISTER SERVICE WORKER -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker registrovan:', reg))
+          .catch(err => console.error('Chyba SW:', err));
+      });
+    }
+  </script>
+</body>
+</html>
