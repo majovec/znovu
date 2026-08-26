@@ -4,7 +4,7 @@ const ASSETS = [
   "./index.html",
   "./app.js",
   "./manifest.json",
-  "./icon.png"
+  "./274846A2-142B-423E-A230-6680FD6B364D.jpeg"
 ];
 
 // Instalace a uložení souborů do Cache
